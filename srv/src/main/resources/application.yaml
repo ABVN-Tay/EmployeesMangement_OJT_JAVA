@@ -5,6 +5,13 @@ spring:
   sql.init.platform: h2
 cds:
   data-source.auto-config.enabled: false
+  security.mock.enabled: true	
+  security:
+    mock.users:
+      admin:
+        roles: Admin
+      viewer:
+        roles: Viewer
 ---
 management:
   endpoint:
