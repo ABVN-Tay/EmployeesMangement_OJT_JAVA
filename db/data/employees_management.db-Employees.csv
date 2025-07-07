@@ -1,0 +1,6 @@
+ID,firstName,lastName,dateOfBirth,gender,email,hireDate,salary,department_ID,role_ID
+e01a2b3c-1d2e-4f56-abc1-1234567890ab,Anna,Keller,1990-05-10,Female,anna.keller@example.com,2022-05-18,53000.00,de8e0a1f-7e9b-45e6-8e41-01d2a6f21c13,f50a1b1e-70c9-40b7-b98e-6f4fd92e7c70
+e02b3c4d-2e3f-5g67-bcd2-2345678901bc,Tom,Meier,1985-11-02,Male,tom.meier@example.com,2019-07-01,74000.00,dab765cf-29e7-4c6f-973f-2eefa84a7d62,f70ab129-1974-4a2e-92c5-4b9240b56c6d
+e03c4d5e-3f40-6h78-cde3-3456789012cd,Lena,Schmidt,1993-02-25,Female,lena.schmidt@example.com,2021-01-20,43000.00,de8e0a1f-7e9b-45e6-8e41-01d2a6f21c13,fa2fc0d6-7d49-4ed5-b75e-0e0a6e1a3c59
+e04d5e6f-4g51-7i89-def4-4567890123de,Mario,Becker,1992-07-19,Male,mario.becker@example.com,2018-09-10,56000.00,dab765cf-29e7-4c6f-973f-2eefa84a7d62,f50a1b1e-70c9-40b7-b98e-6f4fd92e7c70
+e05e6f70-5h62-8j90-efg5-5678901234ef,Julia,Fischer,1988-12-05,Female,julia.fischer@example.com,2016-06-05,76000.00,de8e0a1f-7e9b-45e6-8e41-01d2a6f21c13,f70ab129-1974-4a2e-92c5-4b9240b56c6d
