@@ -1,0 +1,15 @@
+@baseUrl = http://localhost:8080/odata/v4/catalogService
+@me = admin:
+
+###
+GET {{baseUrl}}/Employees?$expand=role,department
+Authorization: Basic {{me}}
+###
+GET {{baseUrl}}/Departments
+Authorization: Basic {{me}}
+###
+GET {{baseUrl}}/Roles
+Authorization: Basic {{me}}
+###
+
+
