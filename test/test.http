@@ -12,4 +12,7 @@ GET {{baseUrl}}/Roles
 Authorization: Basic {{me}}
 ###
 
+GET {{baseUrl}}/getCurrentUser()
+Authorization: Basic {{me}}
+
 
