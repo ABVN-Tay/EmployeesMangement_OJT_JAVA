@@ -1,6 +1,7 @@
 @baseUrl = http://localhost:8080/odata/v4/catalogService
 @me = admin:
 
+@employeeID = 0104524d-1fc7-4e60-a760-28cb8cd3105a
 ###
 GET {{baseUrl}}/Employees?$expand=role,department
 Authorization: Basic {{me}}
@@ -11,8 +12,48 @@ Authorization: Basic {{me}}
 GET {{baseUrl}}/Roles
 Authorization: Basic {{me}}
 ###
-
 GET {{baseUrl}}/getCurrentUser()
 Authorization: Basic {{me}}
+###
+GET {{baseUrl}}/calculateSalary(hireDate=2023-06-21,roles_ID=f50a1b1e-70c9-40b7-b98e-6f4fd92e7c70)
+Authorization: Basic {{me}}
+
+###
+POST  {{baseUrl}}/Employees
+Authorization: Basic {{me}}
+Content-Type: application/json
+
+{
+  "ID": "{{employeeID}}",
+  "dateOfBirth": "1990-05-15",
+  "department_ID": "de8e0a1f-7e9b-45e6-8e41-01d2a6f21c13",
+  "email": "john.doe@example.com",
+  "firstName": "Chuong111",
+  "gender": "Male",
+  "hireDate": "2023-01-10",
+  "lastName": "Ngooo",
+  "role_ID": "f50a1b1e-70c9-40b7-b98e-6f4fd92e7c70",
+  "salary": 70000
+}
+
+
+###
+PUT  {{baseUrl}}/Employees({{employeeID}})
+Authorization: Basic {{me}}
+Content-Type: application/json
+
+{
+  "ID": "{{employeeID}}",
+  "dateOfBirth": "1990-05-15",
+  "department_ID": "de8e0a1f-7e9b-45e6-8e41-01d2a6f21c13",
+  "email": "john.doe@example.com",
+  "firstName": "Chuong111",
+  "gender": "Male",
+  "hireDate": "2022-01-10",
+  "lastName": "Ngooo",
+  "role_ID": "f50a1b1e-70c9-40b7-b98e-6f4fd92e7c70",
+  "salary": 70000
+}
+
 
 
