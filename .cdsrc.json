@@ -4,6 +4,7 @@
       "auth": "xsuaa"
     },
     "db": "hana",
+    "auth": "xsuaa",
     "[hybrid]": {
       "auth": "xsuaa"
     }
