@@ -13,6 +13,18 @@ cds:
       viewer:
         roles: Viewer
 ---
+spring:
+  config.activate.on-profile: cloud
+cds:
+  index-page.enabled: true
+  security.mock.enabled: true	
+  security:
+    mock.users:
+        admin:
+          roles: admin
+        viewer:
+          roles: viewer
+---
 management:
   endpoint:
     health:
