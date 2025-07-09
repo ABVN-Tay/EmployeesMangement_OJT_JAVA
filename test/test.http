@@ -1,4 +1,5 @@
 @baseUrl = http://localhost:8080/odata/v4/catalogService
+# @baseUrl = http://localhost:5000/odata/v4/catalogService
 @me = admin:
 
 @employeeID = e01a2b3c-1d2e-4f56-abc1-1234567890ab

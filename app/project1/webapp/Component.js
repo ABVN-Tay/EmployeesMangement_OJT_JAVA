@@ -17,7 +17,7 @@ sap.ui.define([
             UIComponent.prototype.init.apply(this, arguments);
             
             const oDataModel = new sap.ui.model.odata.v4.ODataModel({
-                serviceUrl: "/catalogService/",
+                serviceUrl: "/odata/v4/catalogService/",
                 synchronizationMode: "None",
                 autoExpandSelect: true
               });

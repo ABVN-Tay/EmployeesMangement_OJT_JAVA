@@ -16,15 +16,15 @@ sap.ui.define([
             this._initID = crypto.randomUUID()
             //Initial employee Information
             const initEmployee = {
-                ID: this._initID,
+                // ID: this._initID,
                 firstName: "",
                 lastName: "",
                 dateOfBirth: "",
                 gender: "Male",
                 email: "",
                 hireDate: "",
-                roles_ID: "f50a1b1e-70c9-40b7-b98e-6f4fd92e7c70",       //Developer , 50000
-                departments_ID: "de8e0a1f-7e9b-45e6-8e41-01d2a6f21c13"  //RDC
+                role_ID: "f50a1b1e-70c9-40b7-b98e-6f4fd92e7c70",       //Developer , 50000
+                department_ID: "de8e0a1f-7e9b-45e6-8e41-01d2a6f21c13"  //RDC
             };
             this._oOriginalData = JSON.parse(JSON.stringify(initEmployee));
 
@@ -68,7 +68,7 @@ sap.ui.define([
 
             // setup employee to create 
             const newEmployee = {
-                ID: this._initID,
+                // ID: this._initID,
                 firstName: oEmployee.firstName,
                 lastName: oEmployee.lastName,
                 dateOfBirth: oEmployee.dateOfBirth,
@@ -76,8 +76,8 @@ sap.ui.define([
                 email: oEmployee.email,
                 hireDate: oEmployee.hireDate,
                 salary: null,
-                departments_ID: oEmployee.departments_ID,
-                roles_ID: oEmployee.roles_ID
+                department_ID: oEmployee.department_ID,
+                role_ID: oEmployee.role_ID
             };
             const errors = this.validateEmployee(newEmployee);
             if (errors.length > 0) {
@@ -87,7 +87,7 @@ sap.ui.define([
             }
             else {
                 //calculate salary
-                const calSalary = await this.getCalSalary(newEmployee.hireDate, newEmployee.roles_ID);
+                const calSalary = await this.getCalSalary(newEmployee.hireDate, newEmployee.role_ID);
 
                 //create Employee
                 newEmployee.salary = parseFloat(calSalary)
@@ -97,7 +97,7 @@ sap.ui.define([
         },
         getCalSalary: async function (hireDate, role_ID) {
             //send request to calculate salary
-            return fetch(`/catalogService/calculateSalary(hireDate=${hireDate},roles_ID=${role_ID})`, {
+            return fetch(`/odata/v4/catalogService/calculateSalary(hireDate=${hireDate},roles_ID=${role_ID})`, {
                 method: "GET",
                 headers: {
                     'x-csrf-token': 'Fetch',
@@ -121,7 +121,7 @@ sap.ui.define([
         },
         createEmployee: function (employee) {
             //send request to create new employee
-            fetch("/catalogService/Employees", {
+            fetch("/odata/v4/catalogService/Employees", {
                 method: "POST",
                 headers: {
                     // 'Authorization': `Bearer ${accessToken}`,
@@ -149,15 +149,15 @@ sap.ui.define([
         },
         onSamplePress: function () {
             const initEmployee = {
-                ID: "",
+                // ID: "",
                 firstName: "John",
                 lastName: "Doe",
                 dateOfBirth: "1990-05-15",
                 gender: "Male",
                 email: "john.doe@example.com",
                 hireDate: "2023-01-10",
-                roles_ID: "f50a1b1e-70c9-40b7-b98e-6f4fd92e7c70",       //Developer , 50000
-                departments_ID: "de8e0a1f-7e9b-45e6-8e41-01d2a6f21c13"  //RDC
+                role_ID: "f50a1b1e-70c9-40b7-b98e-6f4fd92e7c70",       //Developer , 50000
+                department_ID: "de8e0a1f-7e9b-45e6-8e41-01d2a6f21c13"  //RDC
             };
             console.log(initEmployee)
             const empModel = new JSONModel(initEmployee);

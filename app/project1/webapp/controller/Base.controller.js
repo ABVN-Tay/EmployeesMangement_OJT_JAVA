@@ -57,7 +57,7 @@ sap.ui.define([
             if (!employee.lastName) {
                 errors.push("Last Name must not be blank");
             }
-            if (!employee.roles_ID) {
+            if (!employee.role_ID) {
                 errors.push("Role must not be blank");
             }  
             if (!employee.dateOfBirth) {
@@ -69,7 +69,7 @@ sap.ui.define([
             if (!employee.hireDate) {
                 errors.push("Hire Date must not be blank");
             }   
-            if (!employee.departments_ID) {
+            if (!employee.department_ID) {
                 errors.push("Department must not be blank");
             }                        
             if (!this.validateGender(employee.gender)) {

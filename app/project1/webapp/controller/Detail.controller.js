@@ -19,11 +19,12 @@ sap.ui.define([
       _onObjectMatched: function (oEvent) {
         sId = oEvent.getParameter("arguments").id;
         const oModel = this.getView().getModel();
-        const sPath = `/Employees('${sId}')`;
+
+        const sPath = `/Employees(${sId})`;
         //Binding Employee Model to View
         const validGenders = ["Male", "Female", "Other"];
         oModel.bindContext(sPath, null, {
-          $expand: 'departments($select=ID,name),roles($select=ID,name,baseSalary)'
+          $expand: 'department($select=ID,name),role($select=ID,name,baseSalary)'
         })
           .requestObject().then((oEmployee) => {
             const oEmpJSONModel = new JSONModel(oEmployee);
@@ -45,7 +46,7 @@ sap.ui.define([
         oModel.bindList("/Departments").requestContexts().then(aContexts => {
           const aDepartments = aContexts.map(ctx => ctx.getObject());
           const oDepartJSONModel = new JSONModel({ Departments: aDepartments });
-          console.log(oDepartJSONModel)
+          console.log("Departments",oDepartJSONModel)
           this.getView().setModel(oDepartJSONModel, "departmentsModel");
         });
   
@@ -53,7 +54,7 @@ sap.ui.define([
         oModel.bindList("/Roles").requestContexts().then(aContexts => {
           const aRoles = aContexts.map(ctx => ctx.getObject());
           const oRoleJSONModel = new JSONModel({ Roles: aRoles });
-          console.log(oRoleJSONModel)
+          console.log("Roles",oRoleJSONModel)
           this.getView().setModel(oRoleJSONModel, "rolesModel");
         });
   
@@ -79,7 +80,7 @@ sap.ui.define([
       },
       getCalSalary: async function (hireDate, role_ID) {
         //send request to calculate salary
-        return fetch(`/catalogService/calculateSalary(hireDate=${hireDate},roles_ID=${role_ID})`, {
+        return fetch(`/odata/v4/catalogService/calculateSalary(hireDate=${hireDate},roles_ID=${role_ID})`, {
             method: "GET",
             headers: {
                 'x-csrf-token': 'Fetch',
@@ -134,7 +135,7 @@ sap.ui.define([
         const oEmployeeModel = this.getView().getModel("detailModel");
         const oEmployee = oEmployeeModel.getData();
         //Get calculate Salary
-        const calSalary = await this.getCalSalary(oEmployee.hireDate, oEmployee.roles_ID)
+        const calSalary = await this.getCalSalary(oEmployee.hireDate, oEmployee.role_ID)
         //overwrite to Employee salary
         oEmployeeModel.setProperty("/salary",Number(calSalary).toFixed(2))
   
@@ -146,12 +147,12 @@ sap.ui.define([
           gender: oEmployee.gender,
           email: oEmployee.email,
           hireDate: oEmployee.hireDate,
-          departments_ID: oEmployee.departments_ID,
-          roles_ID: oEmployee.roles_ID,
+          department_ID: oEmployee.departments_ID,
+          role_ID: oEmployee.roles_ID,
           salary: parseFloat(oEmployee.salary)
         };
   
-        fetch(`/catalogService/Employees(${oEmployee.ID})`, {
+        fetch(`/odata/v4/catalogService/Employees(${oEmployee.ID})`, {
           method: "PUT",
           headers: {
             'Content-Type': 'application/json',
@@ -218,8 +219,8 @@ sap.ui.define([
         const detailModel = this.getView().getModel("detailModel");
         const detailData = detailModel.getData();
   
-        console.log(detailData)
-        console.log(this._oOriginalData)
+        console.log("New",JSON.stringify(detailData))
+        console.log("Origin",JSON.stringify(this._oOriginalData))
         // Compare stringified versions
         return JSON.stringify(detailData) !== JSON.stringify(this._oOriginalData);
   
@@ -331,7 +332,7 @@ sap.ui.define([
         // get data model from view (oModel binding in View)
         const oEmployee = this.getView().getModel("detailModel").getData();
   
-        fetch(`/catalogService/Employees(${oEmployee.ID})`, {
+        fetch(`/odata/v4/catalogService/Employees(${oEmployee.ID})`, {
           method: "DELETE",
           headers: {
             'Content-Type': 'application/json',

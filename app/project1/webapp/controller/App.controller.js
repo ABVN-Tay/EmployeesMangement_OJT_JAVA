@@ -7,12 +7,18 @@ sap.ui.define([
       onInit() {
         const oModel = this.getOwnerComponent().getModel();
 
-        oModel.bindContext("/getCurrentUser()", null)
+        oModel.bindContext("/getCurrentUser()")
           .requestObject()
           .then((oData) => {
-            const oLocal = new sap.ui.model.json.JSONModel(oData);
+            console.log(oData)
+            const oLocalData = {
+              id: oData.id,
+              email: oData.email || "Not available",
+              roles: oData.roles,
+              isEdit: false
+            }
+            const oLocal = new sap.ui.model.json.JSONModel(oLocalData);
             this.getView().setModel(oLocal, "local");
-            console.log("User Info:", oData)
           })
           .catch(console.error);      
       }
