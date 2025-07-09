@@ -1,4 +1,6 @@
 {
+  "welcomeFile": "project1/index.html",
+  "authenticationMethod": "route",
   "routes": [
     {
       "source": "^/(.*)$",

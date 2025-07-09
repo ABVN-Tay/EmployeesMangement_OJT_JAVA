@@ -1,4 +1,6 @@
-{
+{ 
+  "xsappname": "EmployeesManagement_Java",
+  "tenant-mode": "dedicated",
   "scopes": [
     {
       "name": "$XSAPPNAME.Admin",
@@ -11,5 +13,15 @@
   ],
   "attributes": [],
   "role-templates": [],
-  "authorities-inheritance": false
+  "authorities-inheritance": false,
+  "oauth2-configuration": {
+    "credential-types": [
+      "binding-secret",
+      "x509"
+    ],
+    "redirect-uris": [
+      "https://*.cfapps.us10-001.hana.ondemand.com/**",
+      "https://*.us10.trial.applicationstudio.cloud.sap/**"
+    ]
+  }
 }
