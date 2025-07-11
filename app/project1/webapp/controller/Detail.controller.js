@@ -147,8 +147,8 @@ sap.ui.define([
           gender: oEmployee.gender,
           email: oEmployee.email,
           hireDate: oEmployee.hireDate,
-          department_ID: oEmployee.departments_ID,
-          role_ID: oEmployee.roles_ID,
+          department_ID: oEmployee.department_ID,
+          role_ID: oEmployee.role_ID,
           salary: parseFloat(oEmployee.salary)
         };
   
