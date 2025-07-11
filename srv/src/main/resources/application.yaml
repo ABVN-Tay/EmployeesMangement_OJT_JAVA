@@ -9,9 +9,9 @@ cds:
   security:
     mock.users:
       admin:
-        roles: Admin
+        roles: admin
       viewer:
-        roles: Viewer
+        roles: viewer
 ---
 spring:
   config.activate.on-profile: cloud

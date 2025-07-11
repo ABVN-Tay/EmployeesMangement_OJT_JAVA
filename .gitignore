@@ -47,3 +47,5 @@ gen/db/.env
 **.zip
 # added by cds
 .cdsrc-private.json
+# auto generated wildcard
+db/.env
