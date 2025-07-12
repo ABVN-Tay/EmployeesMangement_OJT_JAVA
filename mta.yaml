@@ -43,6 +43,7 @@ modules:
           url: ~{srv-url}
           forwardAuthToken: true
       - name: OJTJAVA-auth
+      - name: html5-apps-repo-runtime
     provides:
       - name: app-api
         properties:
@@ -61,7 +62,6 @@ modules:
         - npm run build
     requires:
       - name: OJTJAVA-db
-
 resources:
   - name: OJTJAVA-auth
     type: org.cloudfoundry.managed-service
@@ -82,3 +82,8 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+  - name: html5-apps-repo-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime      
