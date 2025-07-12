@@ -1,0 +1,259 @@
+<mvc:View
+  controllerName="project1.controller.Detail"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:f="sap.ui.layout.form"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  displayBlock="true">
+  <Page
+    id="detailPage"
+    title="Employee Details"
+    showNavButton="true"
+    navButtonPress="onNavBack"
+    class="sapUiResponsivePadding">
+    <headerContent>
+      <Button 
+        id="editBtn"
+        text="Edit"
+        icon="sap-icon://edit"
+        press="onEditPress" 
+        visible="{
+          parts: [
+            { path: 'local>/roles' },
+            { path: 'local>/isEdit' }
+          ],
+          formatter: '.isVisibleForAdminNotEditing'
+        }"/>
+      <Button 
+        id="deleteBtn"
+        text="Delete"
+        icon="sap-icon://delete"
+        press="onDeletePress" 
+        visible="{
+          parts: [
+            { path: 'local>/roles' },
+            { path: 'local>/isEdit' }
+          ],
+          formatter: '.isVisibleForAdminNotEditing'
+        }"/>
+      <Button 
+        id="saveBtn"
+        text="Save"
+        icon="sap-icon://save"
+        press="onSavePress" 
+        visible="{
+          parts: [
+            { path: 'local>/roles' },
+            { path: 'local>/isEdit' }
+          ],
+          formatter: '.isVisibleForAdminEditing'
+        }"/>
+      <Button 
+        id="cancelBtn"
+        text="Cancel"
+        icon="sap-icon://cancel"
+        press="onCancelPress" 
+        visible="{
+          parts: [
+            { path: 'local>/roles' },
+            { path: 'local>/isEdit' }
+          ],
+          formatter: '.isVisibleForAdminEditing'
+        }"/>        
+    </headerContent>
+    <VBox id="_IDGenVBox" class="sapUiSmallMargin">    
+      <f:SimpleForm
+          id="EmployeeForm"
+          editable="{
+          parts: [
+            { path: 'local>/roles' },
+            { path: 'local>/isEdit' }
+            ],
+            formatter: '.isVisibleForAdminNotEditing'
+          }"
+          title="Information"
+          layout="ResponsiveGridLayout"
+          labelSpanXL="3" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+          adjustLabelSpan="false"
+          emptySpanXL="4" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+          columnsXL="2" columnsL="2" columnsM="1">
+          <Input id="empID" visible="false" value="{detailModel>/ID}"></Input>
+          <Label id="firstNameLB" text="First Name" />
+          <Input id="firstNameInput" value="{detailModel>/firstName}" 
+            editable="{
+              parts: [
+                { path: 'local>/roles' },
+                { path: 'local>/isEdit' }
+              ],
+              formatter: '.isVisibleForAdminEditing'
+            }" />
+
+          <Label id="lastNameLB" text="Last Name" />
+          <Input id="lastNameInput" value="{detailModel>/lastName}"
+            editable="{
+              parts: [
+                { path: 'local>/roles' },
+                { path: 'local>/isEdit' }
+              ],
+              formatter: '.isVisibleForAdminEditing'
+            }" />
+
+          <Label id="dobLB" text="Date of Birth" />
+          <DatePicker id="dobInput" value="{detailModel>/dateOfBirth}" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd"
+            editable="{
+              parts: [
+                { path: 'local>/roles' },
+                { path: 'local>/isEdit' }
+              ],
+              formatter: '.isVisibleForAdminEditing'
+            }" />
+
+          <Label id="genderLB" text="Gender" />
+          <Select
+            id="genderInput"
+            items="{
+              path: 'genderModel>/',
+              templateShareable: false
+            }"
+            editable="{
+              parts: [
+                { path: 'local>/roles' },
+                { path: 'local>/isEdit' }
+              ],
+              formatter: '.isVisibleForAdminEditing'
+            }" 
+            selectedKey="{detailModel>/gender}"
+          >
+            <core:Item id="_IDGenItem" key="{genderModel>key}" text="{genderModel>text}" />
+          </Select>
+
+          <Label id="emailLB" text="Email" />
+          <Input id="emailInput" value="{detailModel>/email}"
+            editable="{
+              parts: [
+                { path: 'local>/roles' },
+                { path: 'local>/isEdit' }
+              ],
+              formatter: '.isVisibleForAdminEditing'
+            }" />
+
+          <Label id="hireDateLB" text="Hire Date"/>
+          <DatePicker 
+            id="hireDateInput" 
+            valueFormat="yyyy-MM-dd"
+            displayFormat="yyyy-MM-dd"
+            editable="{
+            parts: [
+              { path: 'local>/roles' },
+              { path: 'local>/isEdit' }
+              ],
+              formatter: '.isVisibleForAdminEditing'
+            }"
+            value= "{detailModel>/hireDate}" />
+
+      </f:SimpleForm>
+      <Label id="Separator1" ></Label>
+      <f:SimpleForm
+          id="RolesForm"
+          editable="{
+            parts: [
+              { path: 'local>/roles' },
+              { path: 'local>/isEdit' }
+              ],
+            formatter: '.isVisibleForAdminEditing'
+          }"
+          title="Role"
+          layout="ResponsiveGridLayout"
+          labelSpanXL="3" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+          adjustLabelSpan="false"
+          emptySpanXL="4" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+          columnsXL="2" columnsL="2" columnsM="1">
+          <Label id="rolesNameLB"
+            text="Role Name" />               
+          <Select id="rolesSelect"
+            selectedKey="{detailModel>/role_ID}" 
+            items="{
+              path: 'rolesModel>/Roles'
+            }"
+            change=".onRoleChange"
+            editable="{
+              parts: [
+                { path: 'local>/roles' },
+                { path: 'local>/isEdit' }
+              ],
+              formatter: '.isVisibleForAdminEditing'
+            }">
+            <core:Item id="roleItem" key="{rolesModel>ID}" text="{rolesModel>name}" />
+          </Select>
+          <Label id="baseSalaryLB" visible="{= ${local>/roles} === 'Admin'}"  text="Base Salary" />    
+          <Input id="baseSalaryInput"
+            value="{detailModel>/role/baseSalary}"             
+            editable="false"
+            visible="{= ${local>/roles} === 'Admin'}"/>
+      </f:SimpleForm>    
+      <Label id="Separator2" ></Label>
+      <f:SimpleForm
+          id="DepartemntsForm"
+          editable="{
+            parts: [
+              { path: 'local>/roles' },
+              { path: 'local>/isEdit' }
+              ],
+            formatter: '.isVisibleForAdminEditing'
+          }"
+          title="Department"
+          layout="ResponsiveGridLayout"
+          labelSpanXL="3" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+          adjustLabelSpan="false"
+          emptySpanXL="4" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+          columnsXL="2" columnsL="2" columnsM="1">
+          <Label id="departmentsNameLB"
+            text="Department Name" />        
+          <Select id="departmentsSelect"
+            selectedKey="{detailModel>/department_ID}" 
+            items="{
+              path: 'departmentsModel>/Departments'
+            }"
+            editable="{
+              parts: [
+                { path: 'local>/roles' },
+                { path: 'local>/isEdit' }
+              ],
+              formatter: '.isVisibleForAdminEditing'
+            }">
+            <core:Item id="deparmentItem" key="{departmentsModel>ID}" text="{departmentsModel>name}" />
+          </Select>
+
+      </f:SimpleForm>   
+      <Label id="Separator3" ></Label>         
+      <f:SimpleForm
+          id="SalaryForm"
+          editable = "false"
+          visible="{= ${local>/roles} === 'Admin'}"
+          title="Salary"
+          layout="ResponsiveGridLayout"
+          labelSpanXL="3" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+          adjustLabelSpan="false"
+          emptySpanXL="4" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+          columnsXL="2" columnsL="2" columnsM="1">
+
+          <Label id="CalSalaryLB" text="Total Salary" />
+          <Input id="SalaryInput" 
+              value="{detailModel>/salary}"
+            editable="false"/>  
+          <Button
+            id="caculateBtn"      
+            text="Salary Caculate"
+            icon="sap-icon://currency"
+            press="onCaculatePress" 
+            visible="{
+              parts: [
+                { path: 'local>/roles' },
+                { path: 'local>/isEdit' }
+                ],
+              formatter: '.isVisibleForAdminEditing'
+            }"/>            
+      </f:SimpleForm>          
+    </VBox>  
+  </Page>
+</mvc:View>

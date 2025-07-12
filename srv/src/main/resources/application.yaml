@@ -9,9 +9,21 @@ cds:
   security:
     mock.users:
       admin:
-        roles: Admin
+        roles: admin
       viewer:
-        roles: Viewer
+        roles: viewer
+---
+spring:
+  config.activate.on-profile: cloud
+cds:
+  index-page.enabled: true
+  security.mock.enabled: true	
+  security:
+    mock.users:
+        admin:
+          roles: admin
+        viewer:
+          roles: viewer
 ---
 management:
   endpoint:
